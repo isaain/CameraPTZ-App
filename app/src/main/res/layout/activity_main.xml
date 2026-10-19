@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212">
+
+    <!-- TOP BAR -->
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        android:background="#16191C"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CAMERA PTZ"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.05" />
+
+        <EditText
+            android:id="@+id/etIpVideo"
+            android:layout_width="140dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="8dp"
+            android:background="#1E2328"
+            android:paddingHorizontal="6dp"
+            android:text="rtsp://192.168.1.108:554"
+            android:textColor="#00FF88"
+            android:textSize="10sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- HIDE DATA SWITCH -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:text="HIDE DATA"
+            android:textColor="#AAAAAA"
+            android:textSize="9sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchHideData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="0.85"
+            android:scaleY="0.85"
+            android:theme="@style/Theme.AppCompat" />
+
+        <View
+            android:layout_width="12dp"
+            android:layout_height="0dp" />
+
+        <!-- AI DETECTION SWITCH -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:text="AI DETECTION"
+            android:textColor="#AAAAAA"
+            android:textSize="9sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchAi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="0.85"
+            android:scaleY="0.85" />
+    </LinearLayout>
+
+    <!-- DUAL VIDEO CONTAINER -->
+    <LinearLayout
+        android:id="@+id/videoContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/controlPanel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topBar">
+
+        <!-- CHANNEL 1: OPTICAL RGB 4K -->
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <org.videolan.libvlc.util.VLCVideoLayout
+                android:id="@+id/videoRgb"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#000000" />
+
+            <!-- OVERLAYS CH 1 (CONTROLLED BY HIDE DATA) -->
+            <LinearLayout
+                android:id="@+id/overlayCh1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#B316191C"
+                    android:padding="4dp"
+                    android:text="CH 1 // OPTICAL RGB 4K"
+                    android:textColor="#FFFFFF"
+                    android:textSize="9sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#B316191C"
+                    android:orientation="horizontal"
+                    android:padding="4dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TILT / ELEV"
+                            android:textColor="#888888"
+                            android:textSize="8sp"/>
+                        <TextView
+                            android:id="@+id/tvTilt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-12.4°"
+                            android:textColor="#FFFFFF"
+                            android:textSize="11sp"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ZOOM"
+                            android:textColor="#888888"
+                            android:textSize="8sp"/>
+                        <TextView
+                            android:id="@+id/tvZoom"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="4.2x"
+                            android:textColor="#FFFFFF"
+                            android:textSize="11sp"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="#007ACC" />
+
+        <!-- CHANNEL 2: THERMAL -->
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <org.videolan.libvlc.util.VLCVideoLayout
+                android:id="@+id/videoThermal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#000000" />
+
+            <!-- OVERLAYS CH 2 (CONTROLLED BY HIDE DATA) -->
+            <LinearLayout
+                android:id="@+id/overlayCh2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#B316191C"
+                    android:padding="4dp"
+                    android:text="CH 2 // THERMAL"
+                    android:textColor="#FFFFFF"
+                    android:textSize="9sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#B316191C"
+                        android:padding="4dp"
+                        android:text="PALETTE: WHITE-HOT"
+                        android:textColor="#FFFFFF"
+                        android:textSize="8sp"
+                        android:textStyle="bold" />
+
+                    <View android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#B316191C"
+                        android:padding="4dp"
+                        android:text="• SYNC CH1"
+                        android:textColor="#00FF88"
+                        android:textSize="8sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- RIGHT SIDEBAR PANEL -->
+    <ScrollView
+        android:id="@+id/controlPanel"
+        android:layout_width="180dp"
+        android:layout_height="0dp"
+        android:background="#16191C"
+        android:padding="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PTZ ACTUATION RAIL"
+                android:textColor="#888888"
+                android:textSize="8sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="PTZ OPERATING MODE"
+                android:textColor="#888888"
+                android:textSize="8sp" />
+
+            <Spinner
+                android:id="@+id/spinnerPtzMode"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginTop="2dp"
+                android:background="#1E2328" />
+
+            <!-- 8-WAY TOUCH D-PAD -->
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="6dp"
+                android:columnCount="3"
+                android:rowCount="3">
+
+                <!-- Row 1 -->
+                <Button android:id="@+id/btnUpLeft" android:layout_width="0dp" android:layout_height="0dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:text="↖" android:textSize="11sp" android:padding="0dp" android:backgroundTint="#1E2328" android:textColor="#FFFFFF"/>
+                <Button android:id="@+id/btnUp" android:layout_width="0dp" android:layout_height="0dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:text="↑" android:textSize="11sp" android:padding="0dp" android:backgroundTint="#007ACC" android:textColor="#FFFFFF"/>
+                <Button android:id="@+id/btnUpRight" android:layout_width="0dp" android:layout_height="0dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:text="↗" android:textSize="11sp" android:padding="0dp" android:backgroundTint="#1E2328" android:textColor="#FFFFFF"/>
+
+                <!-- Row 2 -->
+                <Button android:id="@+id/btnLeft" android:layout_width="0dp" android:layout_height="0dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:text="←" android:textSize="11sp" android:padding="0dp" android:backgroundTint="#007ACC" android:textColor="#FFFFFF"/>
+                <Button android:id="@+id/btnStop" android:layout_width="0dp" android:layout_height="0dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:text="STOP" android:textSize="8sp" android:padding="0dp" android:backgroundTint="#AA2222" android:textColor="#FFFFFF"/>
+                <Button android:id="@+id/btnRight" android:layout_width="0dp" android:layout_height="0dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:text="→" android:textSize="11sp" android:padding="0dp" android:backgroundTint="#007ACC" android:textColor="#FFFFFF"/>
+
+                <!-- Row 3 -->
+                <Button android:id="@+id/btnDownLeft" android:layout_width="0dp" android:layout_height="0dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:text="↙" android:textSize="11sp" android:padding="0dp" android:backgroundTint="#1E2328" android:textColor="#FFFFFF"/>
+                <Button android:id="@+id/btnDown" android:layout_width="0dp" android:layout_height="0dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:text="↓" android:textSize="11sp" android:padding="0dp" android:backgroundTint="#007ACC" android:textColor="#FFFFFF"/>
+                <Button android:id="@+id/btnDownRight" android:layout_width="0dp" android:layout_height="0dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:text="↘" android:textSize="11sp" android:padding="0dp" android:backgroundTint="#1E2328" android:textColor="#FFFFFF"/>
+            </GridLayout>
+
+            <!-- TAKE A PHOTO BUTTON -->
+            <Button
+                android:id="@+id/btnTakeFoto"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginTop="6dp"
+                android:backgroundTint="#1E2328"
+                android:padding="0dp"
+                android:text="📷 TAKE A PHOTO"
+                android:textColor="#FFFFFF"
+                android:textSize="9sp"
+                android:textStyle="bold" />
+
+            <!-- MAGNIFICATION TEXT -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="OPTICAL MAG"
+                    android:textColor="#888888"
+                    android:textSize="8sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4.2x / 30x"
+                    android:textColor="#FFFFFF"
+                    android:textSize="8sp" />
+            </LinearLayout>
+
+            <!-- ZOOM BUTTONS -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnZoomIn"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#1E2328"
+                    android:padding="0dp"
+                    android:text="🔍 ZOOM +"
+                    android:textColor="#FFFFFF"
+                    android:textSize="8sp" />
+
+                <View android:layout_width="4dp" android:layout_height="30dp"/>
+
+                <Button
+                    android:id="@+id/btnZoomOut"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#1E2328"
+                    android:padding="0dp"
+                    android:text="🔍 ZOOM -"
+                    android:textColor="#FFFFFF"
+                    android:textSize="8sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
